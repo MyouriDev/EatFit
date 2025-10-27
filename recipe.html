@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grilled Salmon with Roasted Vegetables - EatFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #f9fafb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-image {
+            width: 80px !important;
+            height: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        /* Mobile View */
+        .mobile-view {
+            display: block;
+            background: white;
+        }
+
+        .recipe-header-mobile {
+            position: relative;
+        }
+
+        .recipe-image-mobile {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .back-btn-mobile {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .favorite-btn-mobile {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .recipe-content-mobile {
+            padding: 20px;
+        }
+
+        .tag-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .recipe-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 14px;
+        }
+
+        .rating-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .recipe-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        /* stat icon images */
+        .stat-icon img {
+            width: 28px;
+            height: 28px;
+            display: inline-block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .btn-save {
+            background: #10b981;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-add-meal {
+            background: white;
+            color: #333;
+            padding: 14px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .ingredient-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        /* Card wrapper used for mobile blocks (ingredients, instructions) */
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin-bottom: 20px;
+        }
+
+        /* Accessible checkbox implementation: hide native input and style the label */
+        .ingredient-checkbox {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .ingredient-text {
+            position: relative;
+            padding-left: 32px;
+            display: inline-block;
+        }
+
+        .ingredient-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        input.ingredient-checkbox:checked + .ingredient-text::before {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        input.ingredient-checkbox:checked + .ingredient-text::after {
+            content: '✓';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .ingredient-text {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .instructions-list {
+            margin-bottom: 32px;
+        }
+
+        .instruction-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .instruction-number {
+            width: 32px;
+            height: 32px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .instruction-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 6px;
+        }
+
+        .nutrition-facts {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+        }
+
+        .nutrition-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .nutrition-item:last-child {
+            border-bottom: none;
+        }
+
+        .nutrition-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .nutrition-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .recipe-by {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .author-bio {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .share-section {
+            margin-bottom: 32px;
+        }
+
+        .share-buttons {
+            display: grid;
+            gap: 12px;
+        }
+
+        .share-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .share-facebook {
+            background: #3b5998;
+            color: white;
+        }
+
+        .share-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .share-copy {
+            background: #4b5563;
+            color: white;
+        }
+
+        .reviews-section {
+            margin-bottom: 32px;
+        }
+
+        .review-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .review-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .review-info h5 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .review-meta {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .view-all-link {
+            color: #10b981;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .related-recipes {
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .related-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .related-info {
+            padding: 12px;
+        }
+
+        .related-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .related-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Desktop View */
+        .desktop-view {
+            display: none;
+        }
+
+        .desktop-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        .recipe-image-desktop {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .recipe-header-desktop {
+            margin-bottom: 32px;
+        }
+
+        .recipe-stats-desktop {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            background: #f0fdf4;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card-desktop {
+            text-align: center;
+        }
+
+        .action-buttons-desktop {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .btn-save-desktop {
+            flex: 1;
+            background: #10b981;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-add-meal-desktop {
+            flex: 1;
+            background: white;
+            color: #333;
+            padding: 14px 24px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .desktop-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .main-content {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .related-grid-desktop {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .related-card-desktop {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .related-image-desktop {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 40px 20px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+            max-width: 1200px;
+            margin: 0 auto 32px;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #10b981;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: #374151;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: #10b981;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid #374151;
+            font-size: 14px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 0;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-item.active {
+            color: #10b981;
+        }
+
+        .mobile-nav-item span:first-child {
+            font-size: 20px;
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .mobile-view {
+                display: none;
+            }
+
+            .desktop-view {
+                display: block;
+            }
+
+            .logo-image {
+                width: 96px !important;
+            }
+
+            .recipe-title {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 40px;
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="assets1/logo.png" alt="EatFit logo" class="logo-image">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="homerecipe.html">Recipes</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <a href="getstarted.html" class="btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile View -->
+    <div class="mobile-view">
+        <div class="recipe-header-mobile">
+            <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80" alt="Grilled Salmon" class="recipe-image-mobile">
+            <button class="back-btn-mobile">←</button>
+            <button class="favorite-btn-mobile">❤️</button>
+        </div>
+
+        <div class="recipe-content-mobile">
+            <span class="tag-badge">High Protein</span>
+            <h1 class="recipe-title">Grilled Salmon with Roasted Vegetables</h1>
+            
+            <div class="rating-section">
+                <span class="stars">⭐⭐⭐⭐⭐</span>
+                <span class="rating-text">(4.9) 124 reviews</span>
+            </div>
+
+            <div class="recipe-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-label">Servings</div>
+                    <div class="stat-value">4 people</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-label">Prep Time</div>
+                    <div class="stat-value">15 min</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🍳</div>
+                    <div class="stat-label">Cook Time</div>
+                    <div class="stat-value">20 min</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-label">Calories</div>
+                    <div class="stat-value">385 kcal</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-save">📌 Save Recipe</button>
+                <button class="btn-add-meal">+ Add to Meal Plan</button>
+            </div>
+
+            <h2 class="section-title">Ingredients</h2>
+            <div class="card">
+                <ul class="ingredients-list">
+                    <li class="ingredient-item">
+                        <input id="ing-1" class="ingredient-checkbox" type="checkbox">
+                        <label for="ing-1" class="ingredient-text">4 salmon fillets (6 oz each)</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input id="ing-2" class="ingredient-checkbox" type="checkbox">
+                        <label for="ing-2" class="ingredient-text">2 cups broccoli florets</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input id="ing-3" class="ingredient-checkbox" type="checkbox">
+                        <label for="ing-3" class="ingredient-text">1 large bell pepper, sliced</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input id="ing-4" class="ingredient-checkbox" type="checkbox">
+                        <label for="ing-4" class="ingredient-text">2 tablespoons olive oil</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input id="ing-5" class="ingredient-checkbox" type="checkbox">
+                        <label for="ing-5" class="ingredient-text">1 lemon, sliced</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input id="ing-6" class="ingredient-checkbox" type="checkbox">
+                        <label for="ing-6" class="ingredient-text">2 cloves garlic, minced</label>
+                    </li>
+                    <li class="ingredient-item">
+                        <input id="ing-7" class="ingredient-checkbox" type="checkbox">
+                        <label for="ing-7" class="ingredient-text">Salt and pepper to taste</label>
+                    </li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Instructions</h2>
+            <div class="instructions-list">
+                <div class="instruction-item">
+                    <div class="instruction-number">1</div>
+                    <p class="instruction-text">Preheat your grill to medium-high heat. Season salmon fillets with salt, pepper, and minced garlic.</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">2</div>
+                    <p class="instruction-text">Toss broccoli and bell peppers with olive oil, salt, and pepper. Arrange on a grill pan.</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">3</div>
+                    <p class="instruction-text">Grill vegetables for 10-12 minutes, turning occasionally until tender and lightly charred.</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">4</div>
+                    <p class="instruction-text">Grill salmon for 4-5 minutes per side until cooked through and flakes easily with a fork.</p>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">5</div>
+                    <p class="instruction-text">Serve immediately with lemon slices and enjoy your healthy, protein-packed meal!</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Nutrition Facts</h2>
+            <div class="nutrition-facts">
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Calories</span>
+                    <span class="nutrition-value">385</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Protein</span>
+                    <span class="nutrition-value">35g</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Carbs</span>
+                    <span class="nutrition-value">12g</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Fats</span>
+                    <span class="nutrition-value">22g</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Fiber</span>
+                    <span class="nutrition-value">4g</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">Recipe by</h2>
+            <div class="recipe-by">
+                <img src="https://i.pravatar.cc/150?img=5" alt="Chef Sarah Mitchell" class="author-avatar">
+                <div class="author-info">
+                    <h4>Chef Sarah Mitchell</h4>
+                    <p>Published on March 15, 2024</p>
+                    <p class="author-bio">Certified nutritionist and chef specializing in healthy, delicious meals that fuel your fitness goals.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Share Recipe</h2>
+            <div class="share-section">
+                <div class="share-buttons">
+                    <button class="share-btn share-facebook">📘 Share on Facebook</button>
+                    <button class="share-btn share-instagram">📷 Share on Instagram</button>
+                    <button class="share-btn share-copy">🔗 Copy Link</button>
+                </div>
+            </div>
+
+            <h2 class="section-title">Reviews & Tips (24)</h2>
+            <div class="reviews-section">
+                <div class="review-item">
+                    <div class="review-header">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="Mike Johnson" class="review-avatar">
+                        <div class="review-info">
+                            <h5>Mike Johnson</h5>
+                            <div class="review-meta">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span>2 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review-text">Amazing recipe! The salmon was perfectly cooked and the vegetables had great flavor. Will definitely make this again.</p>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <img src="https://i.pravatar.cc/150?img=20" alt="Lisa Chen" class="review-avatar">
+                        <div class="review-info">
+                            <h5>Lisa Chen</h5>
+                            <div class="review-meta">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span>1 week ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review-text">Great healthy option! I added some asparagus to the vegetables and it was delicious. Perfect for meal prep too.</p>
+                </div>
+                <a href="#" class="view-all-link">View all reviews</a>
+            </div>
+
+            <h2 class="section-title">Related Recipes</h2>
+            <div class="related-recipes">
+                <div class="related-grid">
+                    <div class="related-card">
+                        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80" alt="Grilled Chicken" class="related-image">
+                        <div class="related-info">
+                            <h4 class="related-title">Grilled Chicken Quinoa Bowl</h4>
+                            <div class="related-meta">
+                                <span>25 min</span>
+                                <span>420 cal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="related-card">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="Baked Cod" class="related-image">
+                        <div class="related-info">
+                            <h4 class="related-title">Baked Cod with Sweet Potato</h4>
+                            <div class="related-meta">
+                                <span>30 min</span>
+                                <span>350 cal</span>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="related-card">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="Baked Cod" class="related-image">
+                        <div class="related-info">
+                            <h4 class="related-title">Baked Cod with Sweet Potato</h4>
+                            <div class="related-meta">
+                                <span>30 min</span>
+                                <span>350 cal</span>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="related-card">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="Baked Cod" class="related-image">
+                        <div class="related-info">
+                            <h4 class="related-title">Baked Cod with Sweet Potato</h4>
+                            <div class="related-meta">
+                                <span>30 min</span>
+                                <span>350 cal</span>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="related-card">
+                                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="Baked Cod" class="related-image">
+                                            <div class="related-info">
+                                                <h4 class="related-title">Baked Cod with Sweet Potato</h4>
+                                                <div class="related-meta">
+                                                    <span>30 min</span>
+                                                    <span>350 cal</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- .related-grid -->
+                                </div> <!-- .related-recipes -->
+                            </div> <!-- .recipe-content-mobile -->
+                        </div> <!-- .mobile-view -->
+                        <!-- Desktop View -->
+                        <div class="desktop-view">
+                            <div class="container">
+                                <div class="desktop-layout">
+                                    <div>
+                                        <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&q=80" alt="Grilled Salmon" class="recipe-image-desktop">
+                                    </div>
+                                    <div class="recipe-header-desktop">
+                                        <span class="tag-badge">High Protein</span>
+                                        <h1 class="recipe-title">Grilled Salmon with Roasted Vegetables</h1>
+
+                                        <div class="rating-section">
+                                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                                            <span class="rating-text">(4.9) 124 reviews</span>
+                                        </div>
+
+                                        <div class="recipe-stats-desktop">
+                                            <div class="stat-card-desktop">
+                                                <div class="stat-icon"><img src="assets1/i.svg" alt="Servings"></div>
+                                                <div class="stat-label">Servings</div>
+                                                <div class="stat-value">4 people</div>
+                                            </div>
+                                            <div class="stat-card-desktop">
+                                                <div class="stat-icon"><img src="assets1/prep.png" alt="Prep time"></div>
+                                                <div class="stat-label">Prep Time</div>
+                                                <div class="stat-value">15 min</div>
+                                            </div>
+                                            <div class="stat-card-desktop">
+                                                <div class="stat-icon"><img src="assets1/cook.png" alt="Cook time"></div>
+                                                <div class="stat-label">Cook Time</div>
+                                                <div class="stat-value">20 min</div>
+                                            </div>
+                                            <div class="stat-card-desktop">
+                                                <div class="stat-icon"><img src="assets1/svg-3.png" alt="Calories"></div>
+                                                <div class="stat-label">Calories</div>
+                                                <div class="stat-value">385 kcal</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="action-buttons-desktop">
+                                            <button class="btn-save-desktop">Save Recipe</button>
+                                            <button class="btn-add-meal-desktop">+ Add to Meal Plan</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="desktop-content">
+                                    <div class="main-content">
+                                        <h2 class="section-title">Ingredients</h2>
+                                        <div class="card">
+                                            <ul class="ingredients-list">
+                                                <li class="ingredient-item"><input id="d-ing-1" class="ingredient-checkbox" type="checkbox"><label for="d-ing-1" class="ingredient-text">4 salmon fillets (6 oz each)</label></li>
+                                                <li class="ingredient-item"><input id="d-ing-2" class="ingredient-checkbox" type="checkbox"><label for="d-ing-2" class="ingredient-text">2 cups broccoli florets</label></li>
+                                                <li class="ingredient-item"><input id="d-ing-3" class="ingredient-checkbox" type="checkbox"><label for="d-ing-3" class="ingredient-text">1 large bell pepper, sliced</label></li>
+                                                <li class="ingredient-item"><input id="d-ing-4" class="ingredient-checkbox" type="checkbox"><label for="d-ing-4" class="ingredient-text">2 tablespoons olive oil</label></li>
+                                                <li class="ingredient-item"><input id="d-ing-5" class="ingredient-checkbox" type="checkbox"><label for="d-ing-5" class="ingredient-text">1 lemon, sliced</label></li>
+                                                <li class="ingredient-item"><input id="d-ing-6" class="ingredient-checkbox" type="checkbox"><label for="d-ing-6" class="ingredient-text">2 cloves garlic, minced</label></li>
+                                                <li class="ingredient-item"><input id="d-ing-7" class="ingredient-checkbox" type="checkbox"><label for="d-ing-7" class="ingredient-text">Salt and pepper to taste</label></li>
+                                            </ul>
+                                        </div>
+
+                                        <h2 class="section-title">Instructions</h2>
+                                        <div class="instructions-list">
+                                            <div class="instruction-item"><div class="instruction-number">1</div><p class="instruction-text">Preheat your grill to medium-high heat. Season salmon fillets with salt, pepper, and minced garlic.</p></div>
+                                            <div class="instruction-item"><div class="instruction-number">2</div><p class="instruction-text">Toss broccoli and bell peppers with olive oil, salt, and pepper. Arrange on a grill pan.</p></div>
+                                            <div class="instruction-item"><div class="instruction-number">3</div><p class="instruction-text">Grill vegetables for 10-12 minutes, turning occasionally until tender and lightly charred.</p></div>
+                                            <div class="instruction-item"><div class="instruction-number">4</div><p class="instruction-text">Grill salmon for 4-5 minutes per side until cooked through and flakes easily with a fork.</p></div>
+                                            <div class="instruction-item"><div class="instruction-number">5</div><p class="instruction-text">Serve immediately with lemon slices and enjoy your healthy, protein-packed meal!</p></div>
+                                        </div>
+
+                                        <h2 class="section-title">Reviews & Tips (24)</h2>
+                                        <div class="reviews-section">
+                                            <div class="review-item">
+                                                <div class="review-header">
+                                                    <img src="https://i.pravatar.cc/150?img=12" alt="Mike Johnson" class="review-avatar">
+                                                    <div class="review-info">
+                                                        <h5>Mike Johnson</h5>
+                                                        <div class="review-meta">
+                                                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                                                            <span>2 days ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="review-text">Amazing recipe! The salmon was perfectly cooked and the vegetables had great flavor. Will definitely make this again.</p>
+                                            </div>
+                                            <div class="review-item">
+                                                <div class="review-header">
+                                                    <img src="https://i.pravatar.cc/150?img=20" alt="Lisa Chen" class="review-avatar">
+                                                    <div class="review-info">
+                                                        <h5>Lisa Chen</h5>
+                                                        <div class="review-meta">
+                                                            <span class="stars">⭐⭐⭐⭐</span>
+                                                            <span>1 week ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="review-text">Great healthy option! I added some asparagus to the vegetables and it was delicious. Perfect for meal prep too.</p>
+                                            </div>
+                                            <a href="#" class="view-all-link">View all reviews</a>
+                                        </div>
+                                    </div>
+
+                                    <aside class="sidebar">
+                                        <div class="sidebar-card nutrition-facts">
+                                            <h3 class="section-title">Nutrition Facts</h3>
+                                            <div class="nutrition-item"><span class="nutrition-label">Calories</span><span class="nutrition-value">385</span></div>
+                                            <div class="nutrition-item"><span class="nutrition-label">Protein</span><span class="nutrition-value">35g</span></div>
+                                            <div class="nutrition-item"><span class="nutrition-label">Carbs</span><span class="nutrition-value">12g</span></div>
+                                            <div class="nutrition-item"><span class="nutrition-label">Fats</span><span class="nutrition-value">22g</span></div>
+                                            <div class="nutrition-item"><span class="nutrition-label">Fiber</span><span class="nutrition-value">4g</span></div>
+                                        </div>
+
+                                        <div class="sidebar-card recipe-by">
+                                            <img src="https://i.pravatar.cc/150?img=5" alt="Chef Sarah Mitchell" class="author-avatar">
+                                            <div class="author-info">
+                                                <h4>Chef Sarah Mitchell</h4>
+                                                <p>Published on March 15, 2024</p>
+                                                <p class="author-bio">Certified nutritionist and chef specializing in healthy, delicious meals that fuel your fitness goals.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="sidebar-card share-section">
+                                            <h3 class="section-title">Share Recipe</h3>
+                                            <div class="share-buttons">
+                                                <button class="share-btn share-facebook">Share on Facebook</button>
+                                                <button class="share-btn share-instagram">Share on Instagram</button>
+                                                <button class="share-btn share-copy">Copy Link</button>
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </div>
+
+                                <h2 class="section-title">Related Recipes</h2>
+                                <div class="related-recipes">
+                                    <div class="related-grid-desktop">
+                                        <div class="related-card-desktop">
+                                            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80" alt="Grilled Chicken" class="related-image-desktop">
+                                            <div class="related-info">
+                                                <h4 class="related-title">Grilled Chicken Quinoa Bowl</h4>
+                                                <div class="related-meta"><span>25 min</span><span>420 cal</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="related-card-desktop">
+                                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="Baked Cod" class="related-image-desktop">
+                                            <div class="related-info">
+                                                <h4 class="related-title">Baked Cod with Sweet Potato</h4>
+                                                <div class="related-meta"><span>30 min</span><span>350 cal</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="related-card-desktop">
+                                            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=400&q=80" alt="Meatballs" class="related-image-desktop">
+                                            <div class="related-info">
+                                                <h4 class="related-title">Turkey Meatball Zoodles</h4>
+                                                <div class="related-meta"><span>20 min</span><span>290 cal</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="related-card-desktop">
+                                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Shrimp Salad" class="related-image-desktop">
+                                            <div class="related-info">
+                                                <h4 class="related-title">Grilled Shrimp Avocado Salad</h4>
+                                                <div class="related-meta"><span>15 min</span><span>320 cal</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-brand">
+                        <div class="logo-text">EatFit</div>
+                    </div>
+                    <p>Fueling your fitness journey with delicious, nutritious recipes.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Recipes</h4>
+                    <ul>
+                        <li><a href="#">High Protein</a></li>
+                        <li><a href="#">Low Carb</a></li>
+                        <li><a href="#">Fiber Rich</a></li>
+                        <li><a href="#">Quick Meals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Meal Plans</a></li>
+                        <li><a href="#">Nutrition Guide</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><img src="assets1/instagram-icon.svg" alt="Instagram"></a>
+                        <a href="#"><img src="assets1/facebook-icon.svg" alt="Facebook"></a>
+                        <a href="#"><img src="assets1/twitter-icon.svg" alt="Twitter"></a>
+                        <a href="#"><img src="assets1/youtube-icon.svg" alt="YouTube"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EatFit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="homerecipe.html" class="mobile-nav-item">
+            <img src="assets1/mobile-recipes.svg" alt="Recipes" class="mobile-icon">
+            <span>Recipes</span>
+        </a>
+        <a href="home.html" class="mobile-nav-item active">
+            <img src="assets1/mobile-home.svg" alt="Home" class="mobile-icon">
+            <span>Home</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item">
+            <img src="assets1/mobile-about.svg" alt="About" class="mobile-icon">
+            <span>About</span>
+        </a>
+    </nav>
+</body>
+</html>

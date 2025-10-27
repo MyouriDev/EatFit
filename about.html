@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - EatFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #f9fafb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-image {
+            width: 80px !important;
+            height: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #10b981;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(16, 185, 129, 0.85), rgba(5, 150, 105, 0.85)), url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: #10b981;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 2px solid white;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #10b981;
+        }
+
+        /* Why We Started Section */
+        .why-started {
+            padding: 60px 20px;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #333;
+        }
+
+        .why-content {
+            display: grid;
+            gap: 32px;
+        }
+
+        .reason {
+            display: flex;
+            gap: 16px;
+        }
+
+        .reason-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .health-first { background: #e8f8f3; }
+        .community { background: #fff3e0; }
+        .innovation { background: #ffebee; }
+
+        .reason-content h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .reason-content p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .why-image {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .why-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 60px 20px;
+            background: #f9fafb;
+        }
+
+        .team-subtitle {
+            color: #666;
+            margin-bottom: 32px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .team-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .team-member {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-4px);
+        }
+
+        .team-avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            background: #e0e0e0;
+            object-fit: cover;
+            display: block; /* ensures margin auto centers the image */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 4px solid #fff; /* matches the card look from the screenshot */
+        }
+
+        .team-member h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .team-role {
+            color: #10b981;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .team-member p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Core Values Section */
+        .values {
+            padding: 60px 20px;
+            background: white;
+        }
+
+        .values-subtitle {
+            color: #666;
+            margin-bottom: 32px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .values-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .value-card {
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .value-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px;
+            background: #e8f8f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .value-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .value-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Success Stories Section */
+        .stories {
+            padding: 60px 20px;
+            background: #f9fafb;
+        }
+
+        .stories-subtitle {
+            color: #666;
+            margin-bottom: 32px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .stories-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .story-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .story-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            object-fit: cover;
+        }
+
+        .story-info h4 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .story-info p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .story-card blockquote {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 14px;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #10b981, #059669);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .cta p {
+            font-size: 14px;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .cta-note {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #10b981;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: #374151;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #10b981;
+        }
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid #374151;
+            font-size: 14px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 0;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-item.active {
+            color: #10b981;
+        }
+
+        .mobile-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .logo-image {
+                width: 96px !important;
+            }
+
+            .hero {
+                padding: 100px 20px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .why-started {
+                padding: 80px 20px;
+            }
+
+            .why-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                align-items: center;
+            }
+
+            .why-image {
+                margin-top: 0;
+            }
+
+            .why-image img {
+                height: 400px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .team {
+                padding: 80px 20px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+            }
+
+            .values {
+                padding: 80px 20px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+            }
+
+            .stories {
+                padding: 80px 20px;
+            }
+
+            .stories-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+
+            .cta {
+                padding: 100px 20px;
+            }
+
+            .cta h2 {
+                font-size: 36px;
+            }
+
+            .cta p {
+                font-size: 18px;
+            }
+
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="assets1/logo.png" alt="EatFit logo" class="logo-image">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="homerecipe.html">Recipes</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <a href="getstarted.html" class="btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Our Mission</h1>
+            <p>Transforming lives through the power of nutrition, one recipe at a time. We believe healthy eating should be delicious, accessible, and joyful.</p>
+            <div class="hero-buttons">
+                <a href="homerecipe.html" class="btn-white">Explore Recipes</a>
+                <a href="#" class="btn-secondary">Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why We Started Section -->
+    <section class="why-started">
+        <div class="container">
+            <h2 class="section-title">Why We Started FitFuel</h2>
+            
+            <div class="why-content">
+                <div>
+                    <div class="reason">
+                        <div class="reason-icon health-first">💚</div>
+                        <div class="reason-content">
+                            <h3>Health First</h3>
+                            <p>We believe nutrition is the foundation of a healthy, vibrant life. Every recipe we create supports your wellness journey.</p>
+                        </div>
+                    </div>
+
+                    <div class="reason">
+                        <div class="reason-icon community">🤝</div>
+                        <div class="reason-content">
+                            <h3>Community Driven</h3>
+                            <p>Built by food lovers, for food lovers. Our community shares, learns, and grows together on this nutrition journey.</p>
+                        </div>
+                    </div>
+
+                    <div class="reason">
+                        <div class="reason-icon innovation">💡</div>
+                        <div class="reason-content">
+                            <h3>Innovation</h3>
+                            <p>We constantly evolve our platform with the latest nutritional science and culinary techniques.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-image">
+                    <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=800&q=80" alt="Community gathering">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Meet Our Expert Team</h2>
+            <p class="team-subtitle">Our passionate team of nutritionists, chefs, and fitness experts work together to bring you the best in healthy cooking.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://i.pravatar.cc/150?img=47" alt="Sarah Johnson" class="team-avatar">
+                    <h3>Sarah Johnson</h3>
+                    <p class="team-role">Lead Nutritionist</p>
+                    <p>Registered dietician with 10+ years helping people transform their relationship with food.</p>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="Chef Marcus" class="team-avatar">
+                    <h3>Chef Marcus</h3>
+                    <p class="team-role">Head Chef</p>
+                    <p>Culinary artist specializing in healthy, flavorful cooking without compromising taste.</p>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://i.pravatar.cc/150?img=44" alt="Lisa Chen" class="team-avatar">
+                    <h3>Lisa Chen</h3>
+                    <p class="team-role">Fitness Expert</p>
+                    <p>Personal trainer and wellness coach, integrating nutrition with active lifestyle goals.</p>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://i.pravatar.cc/150?img=33" alt="Dr. Mike" class="team-avatar">
+                    <h3>Dr. Mike</h3>
+                    <p class="team-role">Sports Nutritionist</p>
+                    <p>PhD in nutrition science, specializing in performance nutrition for athletes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="values">
+        <div class="container">
+            <h2 class="section-title">Our Core Values</h2>
+            <p class="values-subtitle">The principles that guide everything we do</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">💚</div>
+                    <h3>Health First</h3>
+                    <p>Every recipe prioritizes your nutritional needs and overall well-being journey.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🍳</div>
+                    <h3>Simplicity</h3>
+                    <p>Healthy eating shouldn't be complicated. We make nutrition accessible and easy.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">👥</div>
+                    <h3>Community</h3>
+                    <p>We believe in the power of shared experiences and mutual support in health journeys.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>Constantly evolving with the latest nutritional science and cooking techniques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="stories">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="stories-subtitle">Real transformations from our amazing community</p>
+            
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-header">
+                        <img src="https://i.pravatar.cc/150?img=48" alt="Emma Rodriguez" class="story-avatar">
+                        <div class="story-info">
+                            <h4>Emma Rodriguez</h4>
+                            <p>Lost 30 lbs</p>
+                        </div>
+                    </div>
+                    <blockquote>"FitFuel completely changed how I think about food. The recipes are so delicious, I don't even feel like I'm on a diet!"</blockquote>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-header">
+                        <img src="https://i.pravatar.cc/150?img=15" alt="James Wilson" class="story-avatar">
+                        <div class="story-info">
+                            <h4>James Wilson</h4>
+                            <p>Improved energy</p>
+                        </div>
+                    </div>
+                    <blockquote>"As a busy dad, these meal plans saved my life. Quick, healthy, and my kids actually eat them!"</blockquote>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-header">
+                        <img src="https://i.pravatar.cc/150?img=45" alt="Maria Santos" class="story-avatar">
+                        <div class="story-info">
+                            <h4>Maria Santos</h4>
+                            <p>Better health</p>
+                        </div>
+                    </div>
+                    <blockquote>"The community support here is incredible. I've learned so much and feel healthier than ever!"</blockquote>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Join Us on Your Nutrition Journey</h2>
+            <p>Ready to transform your relationship with food? Start with our personalized meal plans and join thousands who've already discovered the joy of healthy eating.</p>
+            <div class="cta-buttons">
+                <a href="getstarted.html" class="btn-white">Get Started</a>
+                <a href="homerecipe.html" class="btn-secondary">Browse Recipes</a>
+            </div>
+            <p class="cta-note">No credit card required • 7-day free trial</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-brand">EatFit</div>
+                    <p>Fueling your fitness journey with delicious, nutritious recipes.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Recipes</h4>
+                    <ul>
+                        <li><a href="#">High Protein</a></li>
+                        <li><a href="#">Low Carb</a></li>
+                        <li><a href="#">Fiber Rich</a></li>
+                        <li><a href="#">Quick Meals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Meal Plans</a></li>
+                        <li><a href="#">Nutrition Guide</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><img src="assets1/instagram-icon.svg" alt="Instagram" class="social-icon"></a>
+                        <a href="#"><img src="assets1/facebook-icon.svg" alt="Facebook" class="social-icon"></a>
+                        <a href="#"><img src="assets1/twitter-icon.svg" alt="Twitter" class="social-icon"></a>
+                        <a href="#"><img src="assets1/youtube-icon.svg" alt="YouTube" class="social-icon"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EatFit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="homerecipe.html" class="mobile-nav-item">
+            <img src="assets1/mobile-recipes.svg" alt="Recipes" class="mobile-icon">
+            <span>Recipes</span>
+        </a>
+        <a href="home.html" class="mobile-nav-item">
+            <img src="assets1/mobile-home.svg" alt="Home" class="mobile-icon">
+            <span>Home</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item active">
+            <img src="assets1/mobile-about.svg" alt="About" class="mobile-icon">
+            <span>About</span>
+        </a>
+    </nav>
+</body>
+</html>

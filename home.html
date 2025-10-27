@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EatFit - Fuel Your Fitness with Delicious Recipes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --nav-height: 72px;
+            --nav-logo-size: 80px;
+            --nav-link-size: 16px;
+            --btn-vertical: 12px;
+            --btn-horizontal: 24px;
+            --mobile-nav-height: 64px;
+            --mobile-icon-size: 20px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--nav-height);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo-image {
+            /* use CSS variable so all pages can keep same logo size */
+            width: var(--nav-logo-size) !important;
+            height: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* legacy square icon fallback (kept for other uses) */
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            font-size: var(--nav-link-size);
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            padding: var(--btn-vertical) var(--btn-horizontal);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: background 0.3s;
+            font-size: var(--nav-link-size);
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #10b981;
+            padding: var(--btn-vertical) var(--btn-horizontal);
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s;
+            font-size: var(--nav-link-size);
+        }
+
+        .btn-secondary:hover {
+            background: #10b981;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            padding: 60px 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-direction: column;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text h1 .highlight {
+            color: #10b981;
+        }
+
+        .hero-text p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: none;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 48px;
+            font-size: 18px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .category-card {
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-icon img {
+            /* keep icons centered and preserve original aspect ratio */
+            max-width: 60%;
+            max-height: 60%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .protein { background: #fecaca; }
+        .protein .category-icon { background: #ef4444; color: white; }
+
+        .fiber { background: #d1fae5; }
+        .fiber .category-icon { background: #10b981; color: white; }
+
+        .lowcarb { background: #dbeafe; }
+        .lowcarb .category-icon { background: #3b82f6; color: white; }
+
+        .antioxidants { background: #e9d5ff; }
+        .antioxidants .category-icon { background: #a855f7; color: white; }
+
+        .category-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .category-card p {
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .category-count {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .protein .category-count { color: #ef4444; }
+        .fiber .category-count { color: #10b981; }
+        .lowcarb .category-count { color: #3b82f6; }
+        .antioxidants .category-count { color: #a855f7; }
+
+        /* Featured Recipes */
+        .featured {
+            padding: 80px 0;
+            background: #f9fafb;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .recipe-info {
+            padding: 24px;
+        }
+
+        .recipe-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .badge-protein { background: #fecaca; color: #dc2626; }
+        .badge-antioxidants { background: #e9d5ff; color: #9333ea; }
+        .badge-fiber { background: #d1fae5; color: #059669; }
+
+        .recipe-info h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .recipe-info p {
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .recipe-details {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .recipe-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .star {
+            color: #fbbf24;
+        }
+
+        .view-recipe {
+            color: #10b981;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #10b981, #059669);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: #10b981;
+        }
+
+        .cta .btn-primary:hover {
+            background: #f0fdf4;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .footer-section a:hover {
+            color: #10b981;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-links a {
+            color: #9ca3af;
+            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg);
+        }
+
+        .social-links a:hover img {
+            filter: brightness(0) saturate(100%) invert(61%) sepia(93%) saturate(436%) hue-rotate(101deg) brightness(96%) contrast(86%);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            height: var(--mobile-nav-height);
+            align-items: center;
+            justify-content: space-around;
+            z-index: 1000;
+            padding: 0 8px;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-icon {
+            width: var(--mobile-icon-size);
+            height: var(--mobile-icon-size);
+            display: block;
+        }
+
+        .mobile-nav-item.active {
+            color: #10b981;
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero-content {
+                flex-direction: row;
+            }
+
+            .hero-text h1 {
+                font-size: 48px;
+                margin-bottom: 24px;
+            }
+
+            .hero-text p {
+                font-size: 18px;
+                margin-bottom: 32px;
+            }
+
+            .hero-image {
+                display: block;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .recipe-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+            /* larger logo on desktop */
+            .logo-image {
+                width: 96px !important;
+                height: auto !important;
+            }
+            .logo-text { font-size: 28px; }
+        }
+
+        @media (min-width: 1024px) {
+            .category-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .recipe-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="assets1/logo.png" alt="EatFit logo" class="logo-image">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="homerecipe.html">Recipes</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <a href="getstarted.html" class="btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Fuel Your Fitness with <span class="highlight">Delicious</span> Recipes</h1>
+                    <p>Discover protein-packed, fiber-rich recipes designed for your fitness goals. Transform your kitchen into a powerhouse of nutrition.</p>
+                    <div class="hero-buttons">
+                        <a href="homerecipe.html" class="btn-primary">Explore Recipes</a>
+                        <a href="#" class="btn-secondary">Watch Demo</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop" alt="Healthy food bowls">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Nutrition Categories</h2>
+            <p class="section-subtitle">Explore recipes tailored to your specific nutritional needs</p>
+            <div class="category-grid">
+                <div class="category-card protein">
+                    <div class="category-icon"><img src="assets1/protein-icon.png" alt="Protein"></div>
+                    <h3>Protein Power</h3>
+                    <p>High-protein recipes to fuel muscle growth and recovery</p>
+                    <div class="category-count">250+ Recipes</div>
+                </div>
+                <div class="category-card fiber">
+                    <div class="category-icon"><img src="assets1/fiber-icon.png" alt="Fiber"></div>
+                    <h3>Fiber Rich</h3>
+                    <p>Digestive health recipes packed with natural fiber</p>
+                    <div class="category-count">180+ Recipes</div>
+                </div>
+                <div class="category-card lowcarb">
+                    <div class="category-icon"><img src="assets1/lowcarb-icon.png" alt="Low Carb"></div>
+                    <h3>Low Carb</h3>
+                    <p>Keto-friendly and low-carb options for weight management</p>
+                    <div class="category-count">320+ Recipes</div>
+                </div>
+                <div class="category-card antioxidants">
+                    <div class="category-icon"><img src="assets1/antioxidants-icon.png" alt="Antioxidants"></div>
+                    <h3>Antioxidants</h3>
+                    <p>Superfood recipes to boost immunity and recovery</p>
+                    <div class="category-count">140+ Recipes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Recipes -->
+    <section class="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Recipes</h2>
+            <p class="section-subtitle">Handpicked recipes from our nutrition experts</p>
+            <div class="recipe-grid">
+                <div class="recipe-card">
+                    <a href="recipe.html"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop" class="recipe-image" alt="Grilled Salmon Bowl"></a>
+                    <div class="recipe-info">
+                        <span class="recipe-badge badge-protein">High Protein</span>
+                        <h3><a href="recipe.html" class="recipe-link">Grilled Salmon Bowl</a></h3>
+                        <p>Omega-3 rich salmon with quinoa and roasted vegetables</p>
+                        <div class="recipe-meta">
+                            <span class="recipe-details">35g protein</span>
+                            <div class="recipe-rating">
+                                <span class="star">⭐</span>
+                                <span>4.6</span>
+                            </div>
+                        </div>
+                        <a href="recipe.html" class="view-recipe">View Recipe →</a>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=300&fit=crop" class="recipe-image" alt="Berry Power Bowl">
+                    <div class="recipe-info">
+                        <span class="recipe-badge badge-antioxidants">Antioxidants</span>
+                        <h3>Berry Power Bowl</h3>
+                        <p>Antioxidant-packed smoothie bowl with superfood toppings</p>
+                        <div class="recipe-meta">
+                            <span class="recipe-details">12g fiber</span>
+                            <div class="recipe-rating">
+                                <span class="star">⭐</span>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <a href="recipe.html" class="view-recipe">View Recipe →</a>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400&h=300&fit=crop" class="recipe-image" alt="Lean Muscle Plate">
+                    <div class="recipe-info">
+                        <span class="recipe-badge badge-fiber">Fiber Rich</span>
+                        <h3>Lean Muscle Plate</h3>
+                        <p>Perfectly balanced macros for muscle building</p>
+                        <div class="recipe-meta">
+                            <span class="recipe-details">28g protein</span>
+                            <div class="recipe-rating">
+                                <span class="star">⭐</span>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                        <a href="recipe.html" class="view-recipe">View Recipe →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Kitchen?</h2>
+            <p>Join thousands of fitness enthusiasts who've revolutionized their nutrition with EatFit</p>
+            <a href="getstarted.html" class="btn-primary">Start Your Journey Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-brand">EatFit</div>
+                    <p>Fueling your fitness journey with delicious, nutritious recipes.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Recipes</h4>
+                    <ul>
+                        <li><a href="#">High Protein</a></li>
+                        <li><a href="#">Low Carb</a></li>
+                        <li><a href="#">Fiber Rich</a></li>
+                        <li><a href="#">Quick Meals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Meal Plans</a></li>
+                        <li><a href="#">Nutrition Guide</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><img src="assets1/instagram-icon.svg" alt="Instagram"></a>
+                        <a href="#"><img src="assets1/facebook-icon.svg" alt="Facebook"></a>
+                        <a href="#"><img src="assets1/twitter-icon.svg" alt="Twitter"></a>
+                        <a href="#"><img src="assets1/youtube-icon.svg" alt="YouTube"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EatFit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="homerecipe.html" class="mobile-nav-item">
+            <img src="assets1/mobile-recipes.svg" alt="Recipes" class="mobile-icon">
+            <span>Recipes</span>
+        </a>
+        <a href="home.html" class="mobile-nav-item active">
+            <img src="assets1/mobile-home.svg" alt="Home" class="mobile-icon">
+            <span>Home</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item">
+            <img src="assets1/mobile-about.svg" alt="About" class="mobile-icon">
+            <span>About</span>
+        </a>
+    </nav>
+</body>
+</html>

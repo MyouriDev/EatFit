@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EatFit - Healthy Recipes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #f9fafb;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-image {
+            width: 80px !important;
+            height: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        /* Mobile View */
+        .mobile-view {
+            display: block;
+        }
+
+        .search-bar {
+            padding: 16px 20px;
+            background: white;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .recipe-card {
+            margin: 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .recipe-content {
+            padding: 20px;
+        }
+
+        .recipe-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .recipe-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag.green { background: #f0fdf4; color: #065f46; }
+        .tag.blue { background: #eff6ff; color: #1e40af; }
+        .tag.purple { background: #f3e8ff; color: #6b21a8; }
+        .tag.yellow { background: #fff7ed; color: #92400e; }
+        .tag.orange { background: #fff7ed; color: #9a3412; }
+        .tag.red { background: #fee2e2; color: #991b1b; }
+        .tag.pink { background: #fce7f3; color: #9f1239; }
+
+        /* Desktop View */
+        .desktop-view {
+            display: none;
+        }
+
+        .hero-section {
+            background: white;
+            padding: 40px 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .hero-section p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            background: white;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .filter-select {
+            padding: 10px 14px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            padding: 20px;
+        }
+
+        .desktop-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .desktop-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .badge-lunch { background: #10b981; color: white; }
+        .badge-dinner { background: #3b82f6; color: white; }
+        .badge-breakfast { background: #a855f7; color: white; }
+        .badge-dessert { background: #ec4899; color: white; }
+
+        .favorite-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1;
+            border: none;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .star {
+            color: #fbbf24;
+        }
+
+        .view-recipe-btn {
+            width: 100%;
+            padding: 12px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .view-recipe-btn:hover {
+            background: #f3f4f6;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 40px 20px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+            max-width: 1200px;
+            margin: 0 auto 32px;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #10b981;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: #374151;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: #10b981;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid #374151;
+            font-size: 14px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 0;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-item.active {
+            color: #10b981;
+        }
+
+        .mobile-nav-item span:first-child {
+            font-size: 20px;
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .mobile-view {
+                display: none;
+            }
+
+            .desktop-view {
+                display: block;
+            }
+
+            .logo-image {
+                width: 96px !important;
+            }
+
+            .hero-section {
+                padding: 60px 20px;
+            }
+
+            .hero-section h1 {
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+
+            .hero-section p {
+                font-size: 18px;
+            }
+
+            .recipe-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 32px;
+                padding: 40px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="assets1/logo.png" alt="EatFit logo" class="logo-image">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="homerecipe.html">Recipes</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <a href="getstarted.html" class="btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile View -->
+    <div class="mobile-view">
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search recipes...">
+        </div>
+
+        <div class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80" alt="Grilled Salmon" class="recipe-image">
+            <div class="recipe-content">
+                <h3 class="recipe-title">Grilled Salmon with Veggies</h3>
+                <p class="recipe-description">A healthy and flavorful dish featuring perfectly grilled salmon served with fresh seasonal vegetables.</p>
+                <div class="tags">
+                    <span class="tag green">High Protein</span>
+                    <span class="tag blue">Healthy</span>
+                    <span class="tag purple">30 Min</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80" alt="Buddha Bowl" class="recipe-image">
+            <div class="recipe-content">
+                <h3 class="recipe-title">Vegan Buddha Bowl</h3>
+                <p class="recipe-description">Nutritious quinoa bowl packed with colorful vegetables, chickpeas, and tahini dressing.</p>
+                <div class="tags">
+                    <span class="tag green">Vegan</span>
+                    <span class="tag orange">Plant-Based</span>
+                    <span class="tag blue">Healthy</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80" alt="Pasta Carbonara" class="recipe-image">
+            <div class="recipe-content">
+                <h3 class="recipe-title">Classic Pasta Carbonara</h3>
+                <p class="recipe-description">Traditional Italian carbonara with eggs, pancetta, and parmesan cheese. Comfort food at its finest.</p>
+                <div class="tags">
+                    <span class="tag yellow">Italian</span>
+                    <span class="tag red">Comfort Food</span>
+                    <span class="tag purple">20 Min</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=800&q=80" alt="Smoothie Bowl" class="recipe-image">
+            <div class="recipe-content">
+                <h3 class="recipe-title">Chocolate Avocado Smoothie</h3>
+                <p class="recipe-description">Creamy and nutritious smoothie bowl made with avocado, cocoa, and topped with fresh berries.</p>
+                <div class="tags">
+                    <span class="tag green">Vegan</span>
+                    <span class="tag pink">Dessert</span>
+                    <span class="tag blue">Antioxidants</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=80" alt="Thai Curry" class="recipe-image">
+            <div class="recipe-content">
+                <h3 class="recipe-title">Thai Green Curry</h3>
+                <p class="recipe-description">Aromatic Thai curry with coconut milk, fresh herbs, and your choice of protein and vegetables.</p>
+                <div class="tags">
+                    <span class="tag red">Spicy</span>
+                    <span class="tag yellow">Thai</span>
+                    <span class="tag purple">25 Min</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=80" alt="Greek Salad" class="recipe-image">
+            <div class="recipe-content">
+                <h3 class="recipe-title">Mediterranean Greek Salad</h3>
+                <p class="recipe-description">Fresh and vibrant salad with tomatoes, cucumber, feta cheese, olives, and olive oil dressing.</p>
+                <div class="tags">
+                    <span class="tag blue">Healthy</span>
+                    <span class="tag yellow">Mediterranean</span>
+                    <span class="tag purple">10 Min</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop View -->
+    <div class="desktop-view">
+        <div class="hero-section">
+            <div class="container">
+                <h1>Healthy Recipes</h1>
+                <p>Discover delicious and nutritious recipes for your healthy lifestyle</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="container" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 0;">
+                <span class="filter-label">Filter by:</span>
+                <select class="filter-select">
+                    <option>All Categories</option>
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Dessert</option>
+                </select>
+                <select class="filter-select">
+                    <option>Difficulty</option>
+                    <option>Easy</option>
+                    <option>Medium</option>
+                    <option>Hard</option>
+                </select>
+                <select class="filter-select">
+                    <option>Cooking Time</option>
+                    <option>Under 15 min</option>
+                    <option>15-30 min</option>
+                    <option>30+ min</option>
+                </select>
+                <select class="filter-select">
+                    <option>Diet Type</option>
+                    <option>Vegan</option>
+                    <option>Vegetarian</option>
+                    <option>Keto</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="recipe-grid">
+                <div class="desktop-card">
+                    <span class="card-badge badge-lunch">Lunch</span>
+                    <button class="favorite-btn">🤍</button>
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80" alt="Rainbow Quinoa Bowl" class="recipe-image">
+                    <div class="card-info">
+                        <h3 class="card-title">Rainbow Quinoa Bowl</h3>
+                        <p class="card-description">Colorful and nutritious quinoa bowl packed with fresh vegetables</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 320 cal</span>
+                            <span class="meta-item">🕐 20 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.8</span>
+                        </div>
+                        <a href="recipe.html" class="view-recipe-btn">View Recipe</a>
+                    </div>
+                </div>
+
+                <div class="desktop-card">
+                    <span class="card-badge badge-dinner">Dinner</span>
+                    <button class="favorite-btn">❤️</button>
+                    <a href="recipe.html"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80" alt="Herb-Crusted Salmon" class="recipe-image"></a>
+                    <div class="card-info">
+                        <h3 class="card-title"><a href="recipe.html" class="card-link">Herb-Crusted Salmon</a></h3>
+                        <p class="card-description">Perfectly grilled salmon with fresh herbs and lemon</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 380 cal</span>
+                            <span class="meta-item">🕐 20 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.9</span>
+                        </div>
+                        <a href="recipe.html" class="view-recipe-btn">View Recipe</a>
+                    </div>
+                </div>
+
+                <div class="desktop-card">
+                    <span class="card-badge badge-breakfast">Breakfast</span>
+                    <button class="favorite-btn">🤍</button>
+                    <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=800&q=80" alt="Green Smoothie Bowl" class="recipe-image">
+                    <div class="card-info">
+                        <h3 class="card-title">Green Power Smoothie Bowl</h3>
+                        <p class="card-description">Energizing smoothie bowl with spinach, banana, and berries</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 280 cal</span>
+                            <span class="meta-item">🕐 10 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.7</span>
+                        </div>
+                        <a href="recipe.html" class="view-recipe-btn">View Recipe</a>
+                    </div>
+                </div>
+
+                <div class="desktop-card">
+                    <span class="card-badge badge-dinner">Dinner</span>
+                    <button class="favorite-btn">🤍</button>
+                    <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=80" alt="Spiced Chickpea Curry" class="recipe-image">
+                    <div class="card-info">
+                        <h3 class="card-title">Spiced Chickpea Curry</h3>
+                        <p class="card-description">Aromatic chickpea curry with warming spices and coconut milk</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 310 cal</span>
+                            <span class="meta-item">🕐 35 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.6</span>
+                        </div>
+                        <a href="recipe.html" class="view-recipe-btn">View Recipe</a>
+                    </div>
+                </div>
+
+                <div class="desktop-card">
+                    <span class="card-badge badge-lunch">Lunch</span>
+                    <button class="favorite-btn">❤️</button>
+                    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=80" alt="Mediterranean Greek Salad" class="recipe-image">
+                    <div class="card-info">
+                        <h3 class="card-title">Mediterranean Greek Salad</h3>
+                        <p class="card-description">Fresh and crisp salad with feta, olives, and olive oil dressing</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 220 cal</span>
+                            <span class="meta-item">🕐 15 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.8</span>
+                        </div>
+                        <a href="recipe.html" class="view-recipe-btn">View Recipe</a>
+                    </div>
+                </div>
+
+                <div class="desktop-card">
+                    <span class="card-badge badge-breakfast">Breakfast</span>
+                    <button class="favorite-btn">🤍</button>
+                    <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80" alt="Avocado Toast" class="recipe-image">
+                    <div class="card-info">
+                        <h3 class="card-title">Avocado Toast with Egg</h3>
+                        <p class="card-description">Creamy avocado on sourdough topped with a perfectly poached egg</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 350 cal</span>
+                            <span class="meta-item">🕐 12 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.7</span>
+                        </div>
+                        <a href="recipe.html" class="view-recipe-btn">View Recipe</a>
+                    </div>
+                </div>
+
+                <div class="desktop-card">
+                    <span class="card-badge badge-dinner">Dinner</span>
+                    <button class="favorite-btn">🤍</button>
+                    <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80" alt="Zucchini Noodles" class="recipe-image">
+                    <div class="card-info">
+                        <h3 class="card-title">Zucchini Noodles with Pesto</h3>
+                        <p class="card-description">Light and fresh zucchini noodles with homemade basil pesto</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 180 cal</span>
+                            <span class="meta-item">🕐 18 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.5</span>
+                        </div>
+                        <button class="view-recipe-btn">View Recipe</button>
+                    </div>
+                </div>
+
+                <div class="desktop-card">
+                    <span class="card-badge badge-dessert">Dessert</span>
+                    <button class="favorite-btn">❤️</button>
+                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80" alt="Berry Chia Pudding" class="recipe-image">
+                    <div class="card-info">
+                        <h3 class="card-title">Berry Chia Pudding</h3>
+                        <p class="card-description">Creamy chia pudding topped with fresh berries and coconut</p>
+                        <div class="card-meta">
+                            <span class="meta-item">⏱ 190 cal</span>
+                            <span class="meta-item">🕐 5 min</span>
+                            <span class="meta-item"><span class="star">⭐</span> 4.6</span>
+                        </div>
+                        <button class="view-recipe-btn">View Recipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+                         <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-brand">
+                        <div class="logo-text">EatFit</div>
+                    </div>
+                    <p>Fueling your fitness journey with delicious, nutritious recipes.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Recipes</h4>
+                    <ul>
+                        <li><a href="#">High Protein</a></li>
+                        <li><a href="#">Low Carb</a></li>
+                        <li><a href="#">Fiber Rich</a></li>
+                        <li><a href="#">Quick Meals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Meal Plans</a></li>
+                        <li><a href="#">Nutrition Guide</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><img src="assets1/instagram-icon.svg" alt="Instagram"></a>
+                        <a href="#"><img src="assets1/facebook-icon.svg" alt="Facebook"></a>
+                        <a href="#"><img src="assets1/twitter-icon.svg" alt="Twitter"></a>
+                        <a href="#"><img src="assets1/youtube-icon.svg" alt="YouTube"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EatFit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="homerecipe.html" class="mobile-nav-item active">
+            <img src="assets1/mobile-recipes.svg" alt="Recipes" class="mobile-icon">
+            <span>Recipes</span>
+        </a>
+        <a href="home.html" class="mobile-nav-item">
+            <img src="assets1/mobile-home.svg" alt="Home" class="mobile-icon">
+            <span>Home</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item">
+            <img src="assets1/mobile-about.svg" alt="About" class="mobile-icon">
+            <span>About</span>
+        </a>
+    </nav>

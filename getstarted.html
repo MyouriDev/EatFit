@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - EatFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo-image {
+            width: 80px !important;
+            height: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&h=400&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+            background: #f9fafb;
+        }
+
+        /* Sign Up Form */
+        .signup-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .signup-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .signup-card h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .signup-card .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #10b981;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: #059669;
+        }
+
+        .privacy-notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f0fdf4;
+            border-radius: 8px;
+        }
+
+        .privacy-notice .shield {
+            color: #10b981;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .privacy-notice p {
+            font-size: 12px;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 48px;
+            font-size: 16px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .benefit-card {
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .benefit-card.green { background: #f0fdf4; }
+        .benefit-card.blue { background: #eff6ff; }
+        .benefit-card.orange { background: #fff7ed; }
+
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .benefit-card.green .benefit-icon { background: #10b981; }
+        .benefit-card.blue .benefit-icon { background: #3b82f6; }
+        .benefit-card.orange .benefit-icon { background: #f97316; }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+            max-width: 1200px;
+            margin: 0 auto 32px;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #10b981;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: #374151;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg);
+        }
+
+        .social-links a:hover {
+            background: #10b981;
+        }
+
+        .social-links a:hover img {
+            filter: brightness(0) saturate(100%) invert(61%) sepia(93%) saturate(436%) hue-rotate(101deg) brightness(96%) contrast(86%);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid #374151;
+            font-size: 14px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 0;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-item.active {
+            color: #10b981;
+        }
+
+        .mobile-nav-item span:first-child {
+            font-size: 20px;
+        }
+
+        .mobile-icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+
+            .nav-links {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .logo-image {
+                width: 96px !important;
+                height: auto !important;
+            }
+
+            .hero {
+                padding: 80px 20px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+                margin-bottom: 20px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 60px 0;
+            }
+
+            .signup-section {
+                margin-bottom: 80px;
+            }
+
+            .signup-card {
+                padding: 40px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="assets1/logo.png" alt="EatFit logo" class="logo-image">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="homerecipe.html">Recipes</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <a href="getstarted.html" class="btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Start Your Healthy Journey Today</h1>
+            <p>Transform your nutrition and reach your fitness goals with personalized meal plans, expert guidance, and delicious healthy recipes.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Sign Up Form -->
+            <div class="signup-section">
+                <div class="signup-card">
+                    <h2>Create Your Account</h2>
+                    <p class="subtitle">Join thousands who've transformed their health</p>
+                    
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Create a strong password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" placeholder="Your age" min="13" max="120">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fitnessGoal">Fitness Goal</label>
+                            <select id="fitnessGoal" required>
+                                <option value="">Select your primary goal</option>
+                                <option value="weight-loss">Weight Loss</option>
+                                <option value="muscle-gain">Muscle Gain</option>
+                                <option value="maintenance">Maintain Health</option>
+                                <option value="athletic">Athletic Performance</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mealPlan">Preferred Meal Plan</label>
+                            <select id="mealPlan" required>
+                                <option value="">Choose your meal preference</option>
+                                <option value="balanced">Balanced</option>
+                                <option value="high-protein">High Protein</option>
+                                <option value="low-carb">Low Carb</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Get Started</button>
+
+                        <div class="privacy-notice">
+                            <span class="shield">🛡️</span>
+                            <p>Your information is secure with us. We value your privacy.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Why Choose EatFit -->
+            <section class="why-choose">
+                <h2 class="section-title">Why Choose EatFit?</h2>
+                <p class="section-subtitle">Discover the benefits of joining our healthy community</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card green">
+                        <div class="benefit-icon">🍽️</div>
+                        <h3>Personalized Meal Plans</h3>
+                        <p>Custom nutrition plans tailored to your goals, preferences, and lifestyle for optimal results.</p>
+                    </div>
+
+                    <div class="benefit-card blue">
+                        <div class="benefit-icon">👨‍⚕️</div>
+                        <h3>Expert Guidance</h3>
+                        <p>Access to certified nutritionists and fitness experts who guide you every step of the way.</p>
+                    </div>
+
+                    <div class="benefit-card orange">
+                        <div class="benefit-icon">🧡</div>
+                        <h3>Healthy Recipes</h3>
+                        <p>Thousands of delicious, nutritious recipes that make healthy eating enjoyable and sustainable.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">EatFit</div>
+                <p>Fueling your fitness journey with delicious, nutritious recipes.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Recipes</h4>
+                <ul>
+                    <li><a href="#">High Protein</a></li>
+                    <li><a href="#">Low Carb</a></li>
+                    <li><a href="#">Fiber Rich</a></li>
+                    <li><a href="#">Quick Meals</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Meal Plans</a></li>
+                    <li><a href="#">Nutrition Guide</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><img src="assets1/instagram-icon.svg" alt="Instagram"></a>
+                    <a href="#"><img src="assets1/facebook-icon.svg" alt="Facebook"></a>
+                    <a href="#"><img src="assets1/twitter-icon.svg" alt="Twitter"></a>
+                    <a href="#"><img src="assets1/youtube-icon.svg" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 EatFit. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="homerecipe.html" class="mobile-nav-item">
+            <img src="assets1/mobile-recipes.svg" alt="Recipes" class="mobile-icon">
+            <span>Recipes</span>
+        </a>
+        <a href="home.html" class="mobile-nav-item">
+            <img src="assets1/mobile-home.svg" alt="Home" class="mobile-icon">
+            <span>Home</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item">
+            <img src="assets1/mobile-about.svg" alt="About" class="mobile-icon">
+            <span>About</span>
+        </a>
+        <a href="getstarted.html" class="mobile-nav-item active">
+            <img src="assets1/mobile-account.svg" alt="Sign Up" class="mobile-icon">
+            <span>Sign Up</span>
+        </a>
+    </nav>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                age: document.getElementById('age').value,
+                fitnessGoal: document.getElementById('fitnessGoal').value,
+                mealPlan: document.getElementById('mealPlan').value
+            };
+            
+            console.log('Form submitted:', formData);
+            alert('Welcome to EatFit! Your account has been created successfully.');
+        });
+    </script>
+</body>
+</html>
